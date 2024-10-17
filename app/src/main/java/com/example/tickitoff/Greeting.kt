@@ -18,11 +18,11 @@ import com.example.tickitoff.ui.theme.CustomBlue
 
 @Composable
 fun Greeting(modifier: Modifier = Modifier) {
-    Row (
+    Row(
         verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.fillMaxSize()
     )
     {
+        // Text that should switch between "Good morning!", "Good afternoon!", "Good evening!" depending on TOD.
         Text(
             text = "Good morning!",
             color = CustomBlue,
@@ -37,6 +37,7 @@ fun Greeting(modifier: Modifier = Modifier) {
     }
 }
 
+// Show the logo for the app
 @Composable
 fun GreetingImage(modifier: Modifier = Modifier) {
     val image = painterResource(R.drawable.tickitofflogo)
@@ -46,6 +47,9 @@ fun GreetingImage(modifier: Modifier = Modifier) {
             painter = image,
             contentDescription = null
         )
-        Spacer(modifier.padding(8.dp).width(8.dp))
+        Spacer(
+            modifier
+                .padding(8.dp)
+                .width(8.dp))
     }
 }
