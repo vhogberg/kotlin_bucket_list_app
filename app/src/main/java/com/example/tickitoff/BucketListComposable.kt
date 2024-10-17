@@ -25,20 +25,20 @@ import com.example.tickitoff.ui.theme.CustomGreen
 
 // Main part of the actual bucket list
 @Composable
-fun BucketListComposable(bucketList: List<BucketListItem>) {
-
-    // Get the list of items
-    // val bucketList = getTestBucketListItems()
-
+fun BucketListComposable(bucketList: List<BucketListItem>, state: BucketListState,
+                         onEvent: (BucketListEvent) -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
     ) {
-        // Segmented control switch might be implemented here too
-        // Display the items in a scrollable column
+
+        if (state.isCreatingItem){
+            AddNewItemDialog(state = state, onEvent = onEvent)
+        }
+
         LazyColumn(content = {
             itemsIndexed(bucketList) { index: Int, item: BucketListItem ->
-                BucketListItemComposable(item = item)
+                BucketListItemComposable(item = item, state = state, onEvent = onEvent)
             }
         })
     }
@@ -46,7 +46,8 @@ fun BucketListComposable(bucketList: List<BucketListItem>) {
 
 // Widget/panel style UI for the items
 @Composable
-fun BucketListItemComposable(item: BucketListItem) {
+fun BucketListItemComposable(item: BucketListItem, state: BucketListState,
+                             onEvent: (BucketListEvent) -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -57,7 +58,7 @@ fun BucketListItemComposable(item: BucketListItem) {
         verticalAlignment = Alignment.CenterVertically // Centers icons and text vertically
     ) {
         Column (
-            modifier = Modifier.weight(1f)
+            modifier = Modifier.weight(1f) // occupies all space available
         ) {
             Text(
                 text = item.title,
@@ -89,16 +90,20 @@ fun BucketListItemComposable(item: BucketListItem) {
 
         if (!item.completed){
             Column {
-                // Completed the goal button
-                IconButton(onClick = {  }) {
+                // "Completed the goal" button
+                IconButton(onClick = {
+                    onEvent(BucketListEvent.SetCompleted(item, true))
+                }) {
                     Icon(
                         painter = painterResource(id = R.drawable.baseline_check_circle_24),
                         contentDescription = "Complete item",
                         tint = Color.White
                     )
                 }
-                // Want to remove the goal button
-                IconButton(onClick = {  }) {
+                // "Want to remove the goal" button
+                IconButton(onClick = {
+                    onEvent(BucketListEvent.DeleteItem(item))
+                }) {
                     Icon(
                         painter = painterResource(id = R.drawable.baseline_delete_24),
                         contentDescription = "Remove item",

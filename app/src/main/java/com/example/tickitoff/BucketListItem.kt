@@ -1,13 +1,19 @@
 package com.example.tickitoff
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
 data class BucketListItem(
-    var id: Int,
-    var title: String,
-    var description: String,
-    var doneByYear: Int, // User should set a year they want the goal to be done by
-    var completed : Boolean, // Boolean that tracks whether it is completed or not.
+    val title: String,
+    val description: String,
+    val doneByYear: Int, // User should set a year they want the goal to be done by
+    val completed : Boolean, // Boolean that tracks whether it is completed or not.
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0,
 )
 
+/*
 // For development
 fun getTestBucketListItems(): List<BucketListItem> {
     return listOf<BucketListItem>(
@@ -76,3 +82,5 @@ fun getTestBucketListItems(): List<BucketListItem> {
         ),
     )
 }
+
+ */
