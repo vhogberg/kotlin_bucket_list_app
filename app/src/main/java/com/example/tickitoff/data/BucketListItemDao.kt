@@ -1,4 +1,4 @@
-package com.example.tickitoff
+package com.example.tickitoff.data
 
 import androidx.room.Dao
 import androidx.room.Delete

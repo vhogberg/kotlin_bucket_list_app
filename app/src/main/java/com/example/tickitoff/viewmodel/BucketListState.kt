@@ -1,4 +1,6 @@
-package com.example.tickitoff
+package com.example.tickitoff.viewmodel
+
+import com.example.tickitoff.data.BucketListItem
 
 data class BucketListState(
     val bucketListItems: List<BucketListItem> = emptyList(),

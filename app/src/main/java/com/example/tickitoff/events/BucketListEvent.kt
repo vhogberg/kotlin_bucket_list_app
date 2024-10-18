@@ -1,5 +1,6 @@
-package com.example.tickitoff
+package com.example.tickitoff.events
 
+import com.example.tickitoff.data.BucketListItem
 
 
 /*

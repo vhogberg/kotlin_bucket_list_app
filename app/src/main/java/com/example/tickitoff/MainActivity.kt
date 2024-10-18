@@ -12,8 +12,11 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
+import com.example.tickitoff.data.BucketListDatabase
+import com.example.tickitoff.ui.screens.TickItOffPage
 import com.example.tickitoff.ui.theme.CustomBeige
 import com.example.tickitoff.ui.theme.TickItOffTheme
+import com.example.tickitoff.viewmodel.BucketListItemViewModel
 
 class MainActivity : ComponentActivity() {
 

@@ -1,7 +1,10 @@
-package com.example.tickitoff
+package com.example.tickitoff.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.tickitoff.data.BucketListItem
+import com.example.tickitoff.data.BucketListItemDao
+import com.example.tickitoff.events.BucketListEvent
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -101,6 +104,7 @@ class BucketListItemViewModel(
             }
 
             is BucketListEvent.SetCompleted -> {
+                // Update the in-memory state
                 _state.update { currentState ->
                     val updatedItems = currentState.bucketListItems.map { bucketItem ->
                         if (bucketItem.id == event.item.id) {
@@ -110,6 +114,12 @@ class BucketListItemViewModel(
                         }
                     }
                     currentState.copy(bucketListItems = updatedItems)
+                }
+
+                // Update the item in the database
+                viewModelScope.launch {
+                    val updatedItem = event.item.copy(completed = event.isCompleted)
+                    dao.upsertItem(updatedItem)
                 }
             }
         }

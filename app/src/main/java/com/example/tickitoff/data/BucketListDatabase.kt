@@ -1,4 +1,4 @@
-package com.example.tickitoff
+package com.example.tickitoff.data
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

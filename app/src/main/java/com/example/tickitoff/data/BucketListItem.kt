@@ -1,4 +1,4 @@
-package com.example.tickitoff
+package com.example.tickitoff.data
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

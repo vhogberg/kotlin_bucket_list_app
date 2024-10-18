@@ -1,4 +1,4 @@
-package com.example.tickitoff
+package com.example.tickitoff.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -21,6 +21,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.tickitoff.events.BucketListEvent
+import com.example.tickitoff.viewmodel.BucketListState
+import com.example.tickitoff.R
+import com.example.tickitoff.data.BucketListItem
 import com.example.tickitoff.ui.theme.CustomGreen
 
 // Main part of the actual bucket list
