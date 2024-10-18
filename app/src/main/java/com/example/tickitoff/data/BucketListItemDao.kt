@@ -6,10 +6,12 @@ import androidx.room.Query
 import androidx.room.Upsert
 import kotlinx.coroutines.flow.Flow
 
+// Dao (Data access object), interface to our Room DB.
+
 @Dao
 interface BucketListItemDao {
 
-    @Upsert // Insert if it does not exist already, updates if it does exist
+    @Upsert // Insert if it does not exist already, updates if it does exist, we for example use upsert to update isCompleted variable.
     suspend fun upsertItem(bucketListItem: BucketListItem)
 
     @Delete

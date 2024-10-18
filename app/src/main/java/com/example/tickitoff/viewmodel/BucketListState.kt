@@ -9,6 +9,7 @@ data class BucketListState(
     val doneByYear: Int = 0,
     val isCompleted: Boolean = false,
     val isCreatingItem: Boolean = false, // checks if user is in the menu to add new bucket list item
+    val isSharingItem: Boolean = false, // checks if user is in the menu to share a bucket list item
     val filter: BucketListFilter = BucketListFilter.Active // Default to active filter
 )
 

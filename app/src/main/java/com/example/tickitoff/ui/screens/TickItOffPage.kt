@@ -30,6 +30,7 @@ import com.example.tickitoff.ui.theme.CustomBlue
 
 
 // Main page of app
+
 @Composable
 fun TickItOffPage(
     modifier: Modifier = Modifier,
@@ -37,27 +38,16 @@ fun TickItOffPage(
     onEvent: (BucketListEvent) -> Unit
 ) {
 
+    // Holds whatever option in the segmented control switch we currently have selected, i.e either "Active" or "Completed"
     var selectedOption by remember { mutableStateOf("Active") }
 
-    /*
-    val filteredItems = state.bucketListItems.filter {
-        if (selectedOption == "Active") {
-            !it.completed // Show only active items
-        } else {
-            it.completed // Show only completed items
-        }
-    }
-     */
-
+    // Filter the items based on whatever option in the segmented control switch we currently have selected
     val filteredItems = state.bucketListItems.filter {
         when (state.filter) {
             BucketListFilter.Active -> !it.completed // Show only active items
             BucketListFilter.Completed -> it.completed // Show only completed items
         }
     }
-
-    // Debugging: Check how many items are in filteredItems
-    Log.d("TickItOffPage", "Filtered items count: ${filteredItems.size}")
 
     Box(
         modifier = Modifier
@@ -88,24 +78,22 @@ fun TickItOffPage(
                     )
                 }
             )
-
-            BucketListComposable(bucketList = filteredItems, state = state, onEvent = onEvent) // Shows the list of filtered items
+            // Show the list of filtered items
+            BucketListComposable(bucketList = filteredItems, state = state, onEvent = onEvent)
         }
 
         // Adding the FAB positioned at the bottom right
         FloatingActionButton(
             onClick = {
-                println("FAB Clicked")
-
-                onEvent(BucketListEvent.ShowDialog)
-
+                // Open dialog to create item with event
+                onEvent(BucketListEvent.ShowDialogForCreatingItem)
             },
             modifier = Modifier.align(Alignment.BottomEnd) // Align to bottom right corner
         )
     }
 }
 
-// A FAB button to add bucket list items
+// A FAB to add bucket list items
 @Composable
 fun FloatingActionButton(
     onClick: () -> Unit,

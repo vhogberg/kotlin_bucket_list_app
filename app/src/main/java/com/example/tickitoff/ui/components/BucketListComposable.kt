@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -27,7 +28,7 @@ import com.example.tickitoff.R
 import com.example.tickitoff.data.BucketListItem
 import com.example.tickitoff.ui.theme.CustomGreen
 
-// Main part of the actual bucket list
+// Scrollable ist of bucket list items/goals
 @Composable
 fun BucketListComposable(bucketList: List<BucketListItem>, state: BucketListState,
                          onEvent: (BucketListEvent) -> Unit) {
@@ -36,8 +37,14 @@ fun BucketListComposable(bucketList: List<BucketListItem>, state: BucketListStat
             .fillMaxSize()
     ) {
 
+        // If isCreatingItem is true, then show the dialog to add an item
         if (state.isCreatingItem){
             AddNewItemDialog(state = state, onEvent = onEvent)
+        }
+
+        // If isSharingItem is true, then show the dialog to share an item
+        if (state.isSharingItem){
+            ShareItemDialog(state = state, onEvent = onEvent)
         }
 
         LazyColumn(content = {
@@ -48,7 +55,7 @@ fun BucketListComposable(bucketList: List<BucketListItem>, state: BucketListStat
     }
 }
 
-// Widget/panel style UI for the items
+// Singular item UI
 @Composable
 fun BucketListItemComposable(item: BucketListItem, state: BucketListState,
                              onEvent: (BucketListEvent) -> Unit) {
@@ -62,19 +69,22 @@ fun BucketListItemComposable(item: BucketListItem, state: BucketListState,
         verticalAlignment = Alignment.CenterVertically // Centers icons and text vertically
     ) {
         Column (
-            modifier = Modifier.weight(1f) // occupies all space available
+            modifier = Modifier.weight(1f) // Occupies all space available
         ) {
+            // Title of goal
             Text(
                 text = item.title,
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color.White
             )
+            // Description of goal
             Text(
                 text = item.description,
                 fontSize = 16.sp,
                 color = Color.White
             )
+            // If goal is active
             if (!item.completed) {
                 Text(
                     text = "Should be done by: " + item.doneByYear.toString(),
@@ -82,6 +92,7 @@ fun BucketListItemComposable(item: BucketListItem, state: BucketListState,
                     color = Color.LightGray
                 )
             }
+            // If goal is completed
             else {
                 Text(
                     // text below should maybe be replaced with the date when you completed it
@@ -92,26 +103,44 @@ fun BucketListItemComposable(item: BucketListItem, state: BucketListState,
             }
         }
 
+        // For active goals
         if (!item.completed){
             Column {
-                // "Completed the goal" button
+                // "I completed the goal" button
                 IconButton(onClick = {
-                    onEvent(BucketListEvent.SetCompleted(item, true))
+                    onEvent(BucketListEvent.SetCompleted(item, true)) // set isCompleted to true
                 }) {
                     Icon(
                         painter = painterResource(id = R.drawable.baseline_check_circle_24),
-                        contentDescription = "Complete item",
-                        tint = Color.White
+                        contentDescription = "Complete goal",
+                        tint = Color.White,
+                        modifier = Modifier.size(28.dp)  // Size of icon
                     )
                 }
-                // "Want to remove the goal" button
+                // "I want to remove the goal" button
                 IconButton(onClick = {
-                    onEvent(BucketListEvent.DeleteItem(item))
+                    onEvent(BucketListEvent.DeleteItem(item)) // delete the item from db
                 }) {
                     Icon(
                         painter = painterResource(id = R.drawable.baseline_delete_24),
-                        contentDescription = "Remove item",
-                        tint = Color.White
+                        contentDescription = "Remove goal",
+                        tint = Color.White,
+                        modifier = Modifier.size(28.dp)  // Size of icon
+                    )
+                }
+            }
+        }
+        // For completed goals
+        else {
+            Column {
+                IconButton(onClick = {
+                    onEvent(BucketListEvent.ShowDialogForSharingItem) // open share dialog
+                }) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.baseline_ios_share_24),
+                        contentDescription = "Share completed goal",
+                        tint = Color.White,
+                        modifier = Modifier.size(28.dp)  // Size of icon
                     )
                 }
             }

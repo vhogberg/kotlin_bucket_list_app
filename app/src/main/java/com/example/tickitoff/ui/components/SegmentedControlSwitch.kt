@@ -20,6 +20,7 @@ import com.example.tickitoff.ui.theme.CustomBlue
 import com.example.tickitoff.ui.theme.CustomGreen
 
 // Segmented control style switch for switching between showing active and completed bucket list items
+
 @Composable
 fun SegmentedControlSwitch(
     options: List<String>, // reusable with different options

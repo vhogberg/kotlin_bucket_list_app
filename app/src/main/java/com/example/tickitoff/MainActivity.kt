@@ -18,17 +18,21 @@ import com.example.tickitoff.ui.theme.CustomBeige
 import com.example.tickitoff.ui.theme.TickItOffTheme
 import com.example.tickitoff.viewmodel.BucketListItemViewModel
 
+// Main start activity of app
+
 class MainActivity : ComponentActivity() {
 
+    // Build the db
     private val db by lazy {
         Room.databaseBuilder(
             applicationContext,
             BucketListDatabase::class.java,
             "bucketlistitems.db"
-        ).fallbackToDestructiveMigration()
+        ).fallbackToDestructiveMigration() // forcibly removes old when manually creating new version of db
             .build()
     }
 
+    // Create the viewmodel for bucket list items/goals
     private val viewModel by viewModels<BucketListItemViewModel>(
         factoryProducer = {
             object : ViewModelProvider.Factory {
@@ -48,8 +52,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = CustomBeige
                 ) {
-                    val state by viewModel.state.collectAsState()
-                    TickItOffPage(state = state, onEvent = viewModel::onEvent)
+                    val state by viewModel.state.collectAsState() // get state
+                    TickItOffPage(state = state, onEvent = viewModel::onEvent) // initialize main page with state and viewmodel
                 }
             }
         }

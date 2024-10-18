@@ -56,7 +56,6 @@ class BucketListItemViewModel(
                     description = "",
                     doneByYear = 0
                 ) }
-
             }
 
             is BucketListEvent.DeleteItem -> {
@@ -64,7 +63,7 @@ class BucketListItemViewModel(
 
             }
 
-            BucketListEvent.HideDialog -> {
+            BucketListEvent.HideDialogForCreatingItem -> {
                 _state.update { it.copy (
                     isCreatingItem = false
                 ) }
@@ -81,7 +80,7 @@ class BucketListItemViewModel(
                     title = event.title
                 ) }
             }
-            BucketListEvent.ShowDialog -> {
+            BucketListEvent.ShowDialogForCreatingItem -> {
                 _state.update { it.copy (
                     isCreatingItem = true
                 ) }
@@ -122,6 +121,19 @@ class BucketListItemViewModel(
                     dao.upsertItem(updatedItem)
                 }
             }
+
+            BucketListEvent.ShowDialogForSharingItem -> {
+                _state.update { it.copy (
+                    isSharingItem = true
+                ) }
+            }
+
+            BucketListEvent.HideDialogForSharingItem -> {
+                _state.update { it.copy (
+                    isSharingItem = false
+                ) }
+            }
+
         }
     }
 }

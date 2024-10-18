@@ -16,6 +16,8 @@ import androidx.compose.ui.unit.sp
 import com.example.tickitoff.R
 import com.example.tickitoff.ui.theme.CustomBlue
 
+// Greeting at the top of the screen with dynamic text and logo of app
+
 @Composable
 fun Greeting(modifier: Modifier = Modifier) {
     Row(
