@@ -28,5 +28,4 @@ sealed interface BucketListEvent {
 
     // For deleting item, we have to pass through an already existing item that should be deleted
     data class DeleteItem(val bucketListItem: BucketListItem) : BucketListEvent
-
 }

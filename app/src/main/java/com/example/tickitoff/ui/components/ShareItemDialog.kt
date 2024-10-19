@@ -1,5 +1,8 @@
 package com.example.tickitoff.ui.components
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -23,16 +26,20 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat.startActivity
 import com.example.tickitoff.R
+import com.example.tickitoff.data.BucketListItem
 import com.example.tickitoff.events.BucketListEvent
 import com.example.tickitoff.ui.theme.CustomBeige
 import com.example.tickitoff.ui.theme.CustomBlue
 import com.example.tickitoff.ui.theme.CustomRed
 import com.example.tickitoff.viewmodel.BucketListState
+
 
 // Dialog that shows up when you press a share button to share a bucket list item/goal
 
@@ -43,6 +50,7 @@ fun ShareItemDialog(
     onEvent: (BucketListEvent) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val context = LocalContext.current
 
     BasicAlertDialog(
         onDismissRequest = {
@@ -79,7 +87,7 @@ fun ShareItemDialog(
                         modifier = Modifier
                             .weight(1f) // This ensures each column takes up equal space
                             .clickable(onClick = {
-                                // send sms tbi
+                                TODO()
                             })
                     ) {
                         Icon(
@@ -102,7 +110,7 @@ fun ShareItemDialog(
                         modifier = Modifier
                             .weight(1f)
                             .clickable(onClick = {
-                                // send email tbi
+                                TODO()
                             })
                     ) {
                         Icon(
@@ -119,24 +127,24 @@ fun ShareItemDialog(
                         )
                     }
 
-                    // Facebook Button
+                    // Twitter share button
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         modifier = Modifier
                             .weight(1f)
                             .clickable(onClick = {
-                                // send via Facebook tbi
+                                shareViaTwitter(context)
                             })
                     ) {
                         Icon(
-                            painter = painterResource(id = R.drawable.baseline_person_24),
-                            contentDescription = "Share via Facebook",
+                            painter = painterResource(id = R.drawable.baseline_share_24),
+                            contentDescription = "Share via Twitter",
                             tint = CustomBlue,
                             modifier = Modifier
                                 .size(52.dp)
                         )
                         Text(
-                            text = "Facebook",
+                            text = "Twitter",
                             textAlign = TextAlign.Center,
                             color = CustomBlue
                         )
@@ -164,4 +172,22 @@ fun ShareItemDialog(
             }
         }
     }
+}
+
+// Function to share completed goal via SMS
+fun shareViaSMS() {
+
+}
+
+// Function to share completed goal via email
+fun shareViaEmail() {
+
+}
+
+// Function to share completed goal via twitter
+fun shareViaTwitter(context: Context) {
+    val message = "Hello! I just completed a goal in the TickItOff app, you should try it too!"
+    val tweetUrl = "https://twitter.com/intent/tweet?text=${Uri.encode(message)}"
+    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(tweetUrl))
+    context.startActivity(intent)
 }

@@ -133,7 +133,6 @@ class BucketListItemViewModel(
                     isSharingItem = false
                 ) }
             }
-
         }
     }
 }
