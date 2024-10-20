@@ -122,15 +122,17 @@ class BucketListItemViewModel(
                 }
             }
 
-            BucketListEvent.ShowDialogForSharingItem -> {
-                _state.update { it.copy (
-                    isSharingItem = true
+            is BucketListEvent.ShowDialogForSharingItem -> {
+                _state.update { it.copy(
+                    isSharingItem = true,
+                    selectedItemTitle = event.title // Set the selected item's title
                 ) }
             }
 
-            BucketListEvent.HideDialogForSharingItem -> {
-                _state.update { it.copy (
-                    isSharingItem = false
+            is BucketListEvent.HideDialogForSharingItem -> {
+                _state.update { it.copy(
+                    isSharingItem = false,
+                    selectedItemTitle = null // Clear the title when hiding the dialog
                 ) }
             }
         }

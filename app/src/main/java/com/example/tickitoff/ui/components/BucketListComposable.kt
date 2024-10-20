@@ -41,10 +41,11 @@ fun BucketListComposable(bucketList: List<BucketListItem>, state: BucketListStat
         if (state.isCreatingItem){
             AddNewItemDialog(state = state, onEvent = onEvent)
         }
-
-        // If isSharingItem is true, then show the dialog to share an item
-        if (state.isSharingItem){
-            ShareItemDialog(state = state, onEvent = onEvent)
+        // If isSharingItem is true, then show the dialog to share an item and pass the title of that item
+        if (state.isSharingItem) {
+            state.selectedItemTitle?.let { title ->
+                ShareItemDialog(title = title, onEvent = onEvent)
+            }
         }
 
         LazyColumn(content = {
@@ -134,7 +135,7 @@ fun BucketListItemComposable(item: BucketListItem, state: BucketListState,
         else {
             Column {
                 IconButton(onClick = {
-                    onEvent(BucketListEvent.ShowDialogForSharingItem) // open share dialog
+                    onEvent(BucketListEvent.ShowDialogForSharingItem(item.title)) // Pass the item's title when showing the share dialog
                 }) {
                     Icon(
                         painter = painterResource(id = R.drawable.baseline_ios_share_24),

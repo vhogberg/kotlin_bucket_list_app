@@ -19,7 +19,7 @@ sealed interface BucketListEvent {
     object HideDialogForCreatingItem : BucketListEvent
 
     // When sharing item (Clicking on share icon in "completed" section)
-    object ShowDialogForSharingItem : BucketListEvent
+    data class ShowDialogForSharingItem(val title: String) : BucketListEvent // pass title of the item for sharing (can't be an object for this reason)
     object HideDialogForSharingItem : BucketListEvent
 
     // Show either active or completed bucket list items

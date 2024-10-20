@@ -46,7 +46,7 @@ import com.example.tickitoff.viewmodel.BucketListState
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ShareItemDialog(
-    state: BucketListState,
+    title: String,
     onEvent: (BucketListEvent) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -133,7 +133,7 @@ fun ShareItemDialog(
                         modifier = Modifier
                             .weight(1f)
                             .clickable(onClick = {
-                                shareViaTwitter(context)
+                                shareViaTwitter(context, title)
                             })
                     ) {
                         Icon(
@@ -185,8 +185,8 @@ fun shareViaEmail() {
 }
 
 // Function to share completed goal via twitter
-fun shareViaTwitter(context: Context) {
-    val message = "Hello! I just completed a goal in the TickItOff app, you should try it too!"
+fun shareViaTwitter(context: Context, title: String) {
+    val message = "Hello! I just completed my goal '$title' in the TickItOff app, you should try the app too!"
     val tweetUrl = "https://twitter.com/intent/tweet?text=${Uri.encode(message)}"
     val intent = Intent(Intent.ACTION_VIEW, Uri.parse(tweetUrl))
     context.startActivity(intent)
