@@ -29,6 +29,7 @@ import com.example.tickitoff.viewmodel.BucketListState
 import com.example.tickitoff.R
 import com.example.tickitoff.data.BucketListItem
 import com.example.tickitoff.ui.theme.CustomGreen
+import com.example.tickitoff.utils.vibrateDevice
 
 // Scrollable ist of bucket list items/goals
 @Composable
@@ -116,6 +117,7 @@ fun BucketListItemComposable(item: BucketListItem, state: BucketListState,
                 IconButton(onClick = {
                     onEvent(BucketListEvent.SetCompleted(item, true)) // set isCompleted to true
                     Toast.makeText(context, "Set goal '${item.title}' as complete, congrats!", Toast.LENGTH_LONG).show()
+                    vibrateDevice(context)
                 }) {
                     Icon(
                         painter = painterResource(id = R.drawable.baseline_check_circle_24),
