@@ -1,5 +1,6 @@
 package com.example.tickitoff.ui.components
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -22,6 +23,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -42,6 +44,8 @@ fun AddNewItemDialog(
     onEvent: (BucketListEvent) -> Unit,
     modifier: Modifier = Modifier
 ) {
+
+    val context = LocalContext.current
 
     BasicAlertDialog(
         onDismissRequest = {
@@ -137,6 +141,7 @@ fun AddNewItemDialog(
                     TextButton(
                         onClick = {
                             onEvent(BucketListEvent.CreateItem) // Create the item
+                            Toast.makeText(context, "Created the goal '${state.title}', good luck!", Toast.LENGTH_LONG).show()
                         }
                     ) {
                         Text(

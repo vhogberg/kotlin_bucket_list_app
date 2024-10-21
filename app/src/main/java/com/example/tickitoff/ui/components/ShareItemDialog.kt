@@ -3,6 +3,7 @@ package com.example.tickitoff.ui.components
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -87,7 +88,7 @@ fun ShareItemDialog(
                         modifier = Modifier
                             .weight(1f) // This ensures each column takes up equal space
                             .clickable(onClick = {
-                                TODO()
+                                shareViaSMS(context, title)
                             })
                     ) {
                         Icon(
@@ -174,12 +175,22 @@ fun ShareItemDialog(
     }
 }
 
-// Function to share completed goal via SMS
-fun shareViaSMS() {
-
+// Function to share completed goal via SMS, user will need to enter recipient by themselves after redirect
+fun shareViaSMS(context: Context, title: String) {
+    try {
+        val intent = Intent(Intent.ACTION_SENDTO).apply {
+            data = Uri.parse("smsto:")
+            putExtra("sms_body", "Hello!\n\nI completed my goal titled '$title' in the TickItOff bucket list app!" +
+                    "\nIf you haven't already, you should try the app too!" +
+                    "\n\nBest regards")
+        }
+        context.startActivity(intent)
+    } catch (e: Exception) {
+        Log.e("SMS_SENDER", "Failed to send SMS: ${e.message}")
+    }
 }
 
-// Function to share completed goal via email
+// Function to share completed goal via email, user will need to enter recipient by themselves after redirect
 fun shareViaEmail(context: Context, title: String) {
     val emailIntent = Intent(Intent.ACTION_SEND).apply {
         type = "text/plain"

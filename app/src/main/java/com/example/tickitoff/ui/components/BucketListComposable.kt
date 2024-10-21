@@ -1,5 +1,6 @@
 package com.example.tickitoff.ui.components
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -18,6 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -60,6 +62,9 @@ fun BucketListComposable(bucketList: List<BucketListItem>, state: BucketListStat
 @Composable
 fun BucketListItemComposable(item: BucketListItem, state: BucketListState,
                              onEvent: (BucketListEvent) -> Unit) {
+
+    val context = LocalContext.current
+
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -110,6 +115,7 @@ fun BucketListItemComposable(item: BucketListItem, state: BucketListState,
                 // "I completed the goal" button
                 IconButton(onClick = {
                     onEvent(BucketListEvent.SetCompleted(item, true)) // set isCompleted to true
+                    Toast.makeText(context, "Set goal '${item.title}' as complete, congrats!", Toast.LENGTH_LONG).show()
                 }) {
                     Icon(
                         painter = painterResource(id = R.drawable.baseline_check_circle_24),
@@ -121,6 +127,7 @@ fun BucketListItemComposable(item: BucketListItem, state: BucketListState,
                 // "I want to remove the goal" button
                 IconButton(onClick = {
                     onEvent(BucketListEvent.DeleteItem(item)) // delete the item from db
+                    Toast.makeText(context, "Removed the goal '${item.title}'", Toast.LENGTH_LONG).show()
                 }) {
                     Icon(
                         painter = painterResource(id = R.drawable.baseline_delete_24),
