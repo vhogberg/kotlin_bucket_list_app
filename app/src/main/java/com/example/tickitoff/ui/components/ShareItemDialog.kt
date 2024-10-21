@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -39,6 +40,7 @@ import com.example.tickitoff.events.BucketListEvent
 import com.example.tickitoff.ui.theme.CustomBeige
 import com.example.tickitoff.ui.theme.CustomBlue
 import com.example.tickitoff.ui.theme.CustomRed
+import com.example.tickitoff.utils.isConnectedToInternet
 import com.example.tickitoff.viewmodel.BucketListState
 
 
@@ -205,8 +207,14 @@ fun shareViaEmail(context: Context, title: String) {
 
 // Function to share completed goal via twitter
 fun shareViaTwitter(context: Context, title: String) {
-    val message = "Hello! I just completed my goal '$title' in the TickItOff app, you should try the app too!"
-    val tweetUrl = "https://twitter.com/intent/tweet?text=${Uri.encode(message)}"
-    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(tweetUrl))
-    context.startActivity(intent)
+    // Check that user is connected to internet for this
+    if (isConnectedToInternet(context)){
+        val message = "Hello! I just completed my goal '$title' in the TickItOff app, you should try the app too!"
+        val tweetUrl = "https://twitter.com/intent/tweet?text=${Uri.encode(message)}"
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(tweetUrl))
+        context.startActivity(intent)
+    }
+    else {
+        Toast.makeText(context, "You need to be connected to the internet to do this, try again later.", Toast.LENGTH_LONG).show()
+    }
 }
