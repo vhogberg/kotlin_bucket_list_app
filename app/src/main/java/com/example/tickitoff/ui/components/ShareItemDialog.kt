@@ -110,7 +110,7 @@ fun ShareItemDialog(
                         modifier = Modifier
                             .weight(1f)
                             .clickable(onClick = {
-                                TODO()
+                                shareViaEmail(context, title)
                             })
                     ) {
                         Icon(
@@ -180,8 +180,16 @@ fun shareViaSMS() {
 }
 
 // Function to share completed goal via email
-fun shareViaEmail() {
-
+fun shareViaEmail(context: Context, title: String) {
+    val emailIntent = Intent(Intent.ACTION_SEND).apply {
+        type = "text/plain"
+        putExtra(Intent.EXTRA_SUBJECT, "I completed a goal in the TickItOff app") // ämne
+        putExtra(Intent.EXTRA_TEXT, "Hello!\n\nI completed my goal titled '$title' in the TickItOff bucket list app!" +
+                "\nIf you haven't already, you should try the app too!" +
+                "\n\nBest regards") // Message
+    }
+    // Start the intent
+    context.startActivity(Intent.createChooser(emailIntent, "Choose your email client"))
 }
 
 // Function to share completed goal via twitter
