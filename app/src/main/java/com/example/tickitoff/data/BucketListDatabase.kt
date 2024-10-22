@@ -10,8 +10,5 @@ import androidx.room.RoomDatabase
     version = 1 // ++change to update to new clean database
 )
 abstract class BucketListDatabase : RoomDatabase() {
-
     abstract val dao: BucketListItemDao
-
-
 }

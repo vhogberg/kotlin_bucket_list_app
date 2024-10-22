@@ -9,8 +9,7 @@ import android.net.NetworkCapabilities
 fun isConnectedToInternet(context: Context): Boolean { // returns boolean of true/false
     val connectionManager =
         context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-    val capabilities =
-        connectionManager.getNetworkCapabilities(connectionManager.activeNetwork)
+    val capabilities = connectionManager.getNetworkCapabilities(connectionManager.activeNetwork)
     if (capabilities != null) {
         if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) { // Connected with cellular/mobile data
             return true

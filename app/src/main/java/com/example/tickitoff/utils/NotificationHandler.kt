@@ -11,7 +11,7 @@ import kotlin.random.Random
 
 // Handling notifications with NotificationManager
 
-class NotificationHandler (
+class NotificationHandler(
     private val context: Context
 ) {
     private val notificationManager = context.getSystemService(NotificationManager::class.java)
@@ -24,7 +24,11 @@ class NotificationHandler (
             .setContentText(message)
             .setSmallIcon(R.drawable.tickitofflogo)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
-            .setLights(CustomGreen.toArgb(), 500, 500) // We will flash our custom color so user gets a hint it comes from our app
+            .setLights(
+                CustomGreen.toArgb(),
+                500,
+                500
+            ) // We will flash our custom color so user gets a hint it comes from our app
             .setAutoCancel(true)
             .build()
 

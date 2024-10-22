@@ -19,9 +19,7 @@ class BucketListItemViewModel(
 
     private val _state = MutableStateFlow(BucketListState())
     val state: StateFlow<BucketListState> = _state.asStateFlow().stateIn(
-        viewModelScope,
-        SharingStarted.WhileSubscribed(6000),
-        BucketListState()
+        viewModelScope, SharingStarted.WhileSubscribed(6000), BucketListState()
     ) // This creates an immutable StateFlow that external classes can observe but cannot modify directly.
 
     init {
@@ -55,10 +53,7 @@ class BucketListItemViewModel(
                 }
                 _state.update {
                     it.copy(
-                        isCreatingItem = false,
-                        title = "",
-                        description = "",
-                        doneByYear = 0
+                        isCreatingItem = false, title = "", description = "", doneByYear = 0
                     )
                 }
             }

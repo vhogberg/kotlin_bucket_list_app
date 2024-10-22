@@ -18,8 +18,7 @@ fun vibrateDevice(context: Context) {
             )
         } else {
             // Use the deprecated method for devices running API < 26
-            @Suppress("DEPRECATION")
-            vibrator.vibrate(500) // half a second length
+            @Suppress("DEPRECATION") vibrator.vibrate(500) // half a second length
         }
     }
 }

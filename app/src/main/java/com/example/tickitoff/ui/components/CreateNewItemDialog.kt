@@ -141,7 +141,11 @@ fun AddNewItemDialog(
                     TextButton(
                         onClick = {
                             onEvent(BucketListEvent.CreateItem) // Create the item
-                            Toast.makeText(context, "Created the goal '${state.title}', good luck!", Toast.LENGTH_LONG).show()
+                            Toast.makeText(
+                                context,
+                                "Created the goal '${state.title}', good luck!",
+                                Toast.LENGTH_LONG
+                            ).show()
                         }
                     ) {
                         Text(

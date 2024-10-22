@@ -25,11 +25,14 @@ class MyApplication : Application() {
                 NotificationManager.IMPORTANCE_HIGH
             ).apply {
                 enableLights(true)
-                lightColor = Color.Blue.toArgb() // We will flash our custom color so user gets a hint it comes from our app
+                lightColor =
+                    Color.Blue.toArgb() // We will flash our custom color so user gets a hint it comes from our app
             }
-            notificationChannel.description = "For the TickItOff app's reminder notifications" // User can see this text in settings
+            notificationChannel.description =
+                "For the TickItOff app's reminder notifications" // User can see this text in settings
 
-            val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            val notificationManager =
+                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(notificationChannel)
         }
     }

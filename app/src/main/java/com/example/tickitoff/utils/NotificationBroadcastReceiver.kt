@@ -9,7 +9,8 @@ import android.content.Intent
 class NotificationBroadcastReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         val title = intent.getStringExtra("title") ?: "Are you feeling inspired?"
-        val message = intent.getStringExtra("message") ?: "Today is a great day to set a new goal in the TickItOff app!"
+        val message = intent.getStringExtra("message")
+            ?: "Today is a great day to set a new goal in the TickItOff app!"
 
         val notificationHandler = NotificationHandler(context)
         notificationHandler.showNotification(title, message)

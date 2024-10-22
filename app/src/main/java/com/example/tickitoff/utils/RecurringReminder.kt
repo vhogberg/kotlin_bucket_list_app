@@ -44,9 +44,7 @@ fun scheduleRecurringReminder(context: Context) {
 
     // Schedule the alarm
     alarmManager.setInexactRepeating(
-        AlarmManager.RTC_WAKEUP,
-        calendar.timeInMillis,
-        AlarmManager.INTERVAL_DAY,  // Repeat daily
+        AlarmManager.RTC_WAKEUP, calendar.timeInMillis, AlarmManager.INTERVAL_DAY,  // Repeat daily
         pendingIntent
     )
 }

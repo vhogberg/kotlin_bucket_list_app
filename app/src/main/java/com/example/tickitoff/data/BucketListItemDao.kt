@@ -18,6 +18,6 @@ interface BucketListItemDao {
     suspend fun deleteItem(bucketListItem: BucketListItem)
 
     @Query("SELECT * FROM bucketListItem ORDER BY id ASC")
-    fun getAllItems() : Flow<List<BucketListItem>>
+    fun getAllItems(): Flow<List<BucketListItem>>
 
 }

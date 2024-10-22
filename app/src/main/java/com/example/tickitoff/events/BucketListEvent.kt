@@ -12,14 +12,17 @@ sealed interface BucketListEvent {
     data class SetTitle(val title: String) : BucketListEvent
     data class SetDescription(val description: String) : BucketListEvent
     data class SetDoneByYear(val doneByYear: Int) : BucketListEvent
-    data class SetCompleted(val item: BucketListItem, val isCompleted: Boolean) : BucketListEvent // takes in an existing item for when isCompleted needs to be updated from false to true
+    data class SetCompleted(val item: BucketListItem, val isCompleted: Boolean) :
+        BucketListEvent // takes in an existing item for when isCompleted needs to be updated from false to true
 
     // When creating item (Clicking on FAB)
     object ShowDialogForCreatingItem : BucketListEvent
     object HideDialogForCreatingItem : BucketListEvent
 
     // When sharing item (Clicking on share icon in "completed" section)
-    data class ShowDialogForSharingItem(val title: String) : BucketListEvent // pass title of the item for sharing (can't be an object for this reason)
+    data class ShowDialogForSharingItem(val title: String) :
+        BucketListEvent // pass title of the item for sharing (can't be an object for this reason)
+
     object HideDialogForSharingItem : BucketListEvent
 
     // Show either active or completed bucket list items

@@ -22,8 +22,7 @@ import com.example.tickitoff.ui.theme.CustomBlue
 fun Greeting(modifier: Modifier = Modifier) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
-    )
-    {
+    ) {
         // Text that should switch between "Good morning!", "Good afternoon!", "Good evening!" depending on TOD.
         Text(
             text = "Good morning!",
@@ -31,8 +30,7 @@ fun Greeting(modifier: Modifier = Modifier) {
             fontSize = 40.sp,
             fontWeight = FontWeight.Bold,
             modifier = modifier.padding(
-                horizontal = 8.dp,
-                vertical = 8.dp
+                horizontal = 8.dp, vertical = 8.dp
             )
         )
         GreetingImage()
@@ -46,8 +44,7 @@ fun GreetingImage(modifier: Modifier = Modifier) {
     Row {
         Spacer(modifier.padding(8.dp))
         Image(
-            painter = image,
-            contentDescription = null
+            painter = image, contentDescription = null
         )
         Spacer(
             modifier

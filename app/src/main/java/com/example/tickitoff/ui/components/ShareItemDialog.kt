@@ -33,15 +33,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.core.content.ContextCompat.startActivity
 import com.example.tickitoff.R
-import com.example.tickitoff.data.BucketListItem
 import com.example.tickitoff.events.BucketListEvent
 import com.example.tickitoff.ui.theme.CustomBeige
 import com.example.tickitoff.ui.theme.CustomBlue
 import com.example.tickitoff.ui.theme.CustomRed
 import com.example.tickitoff.utils.isConnectedToInternet
-import com.example.tickitoff.viewmodel.BucketListState
 
 
 // Dialog that shows up when you press a share button to share a bucket list item/goal
@@ -182,9 +179,12 @@ fun shareViaSMS(context: Context, title: String) {
     try {
         val intent = Intent(Intent.ACTION_SENDTO).apply {
             data = Uri.parse("smsto:")
-            putExtra("sms_body", "Hello!\n\nI completed my goal titled '$title' in the TickItOff bucket list app!" +
-                    "\nIf you haven't already, you should try the app too!" +
-                    "\n\nBest regards")
+            putExtra(
+                "sms_body",
+                "Hello!\n\nI completed my goal titled '$title' in the TickItOff bucket list app!" +
+                        "\nIf you haven't already, you should try the app too!" +
+                        "\n\nBest regards"
+            )
         }
         context.startActivity(intent)
     } catch (e: Exception) {
@@ -197,9 +197,12 @@ fun shareViaEmail(context: Context, title: String) {
     val emailIntent = Intent(Intent.ACTION_SEND).apply {
         type = "text/plain"
         putExtra(Intent.EXTRA_SUBJECT, "I completed a goal in the TickItOff app") // ämne
-        putExtra(Intent.EXTRA_TEXT, "Hello!\n\nI completed my goal titled '$title' in the TickItOff bucket list app!" +
-                "\nIf you haven't already, you should try the app too!" +
-                "\n\nBest regards") // Message
+        putExtra(
+            Intent.EXTRA_TEXT,
+            "Hello!\n\nI completed my goal titled '$title' in the TickItOff bucket list app!" +
+                    "\nIf you haven't already, you should try the app too!" +
+                    "\n\nBest regards"
+        ) // Message
     }
     // Start the intent
     context.startActivity(Intent.createChooser(emailIntent, "Choose your email client"))
@@ -208,13 +211,17 @@ fun shareViaEmail(context: Context, title: String) {
 // Function to share completed goal via twitter
 fun shareViaTwitter(context: Context, title: String) {
     // Check that user is connected to internet for this
-    if (isConnectedToInternet(context)){
-        val message = "Hello! I just completed my goal '$title' in the TickItOff app, you should try the app too!"
+    if (isConnectedToInternet(context)) {
+        val message =
+            "Hello! I just completed my goal '$title' in the TickItOff app, you should try the app too!"
         val tweetUrl = "https://twitter.com/intent/tweet?text=${Uri.encode(message)}"
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(tweetUrl))
         context.startActivity(intent)
-    }
-    else {
-        Toast.makeText(context, "You need to be connected to the internet to do this, try again later.", Toast.LENGTH_LONG).show()
+    } else {
+        Toast.makeText(
+            context,
+            "You need to be connected to the internet to do this, try again later.",
+            Toast.LENGTH_LONG
+        ).show()
     }
 }
