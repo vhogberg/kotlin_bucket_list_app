@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
@@ -41,23 +42,15 @@ fun BucketListComposable(
         modifier = Modifier
             .fillMaxSize()
     ) {
-
-        // If isCreatingItem is true, then show the dialog to add an item
-        if (state.isCreatingItem) {
-            AddNewItemDialog(state = state, onEvent = onEvent)
-        }
-        // If isSharingItem is true, then show the dialog to share an item and pass the title of that item
-        if (state.isSharingItem) {
-            state.selectedItemTitle?.let { title ->
-                ShareItemDialog(title = title, onEvent = onEvent)
+        LazyColumn {
+            items(bucketList) { item ->
+                BucketListItemComposable(
+                    item = item,
+                    state = state,
+                    onEvent = onEvent
+                )
             }
         }
-
-        LazyColumn(content = {
-            itemsIndexed(bucketList) { index: Int, item: BucketListItem ->
-                BucketListItemComposable(item = item, state = state, onEvent = onEvent)
-            }
-        })
     }
 }
 
