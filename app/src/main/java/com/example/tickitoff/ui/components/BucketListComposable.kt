@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -25,12 +24,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.tickitoff.events.BucketListEvent
-import com.example.tickitoff.viewmodel.BucketListState
 import com.example.tickitoff.R
 import com.example.tickitoff.data.BucketListItem
+import com.example.tickitoff.events.BucketListEvent
 import com.example.tickitoff.ui.theme.CustomGreen
 import com.example.tickitoff.utils.vibrateDevice
+import com.example.tickitoff.viewmodel.BucketListState
 
 // Scrollable ist of bucket list items/goals
 @Composable
@@ -46,7 +45,6 @@ fun BucketListComposable(
             items(bucketList) { item ->
                 BucketListItemComposable(
                     item = item,
-                    state = state,
                     onEvent = onEvent
                 )
             }
@@ -57,8 +55,7 @@ fun BucketListComposable(
 // Singular item UI
 @Composable
 fun BucketListItemComposable(
-    item: BucketListItem, state: BucketListState,
-    onEvent: (BucketListEvent) -> Unit
+    item: BucketListItem, onEvent: (BucketListEvent) -> Unit
 ) {
 
     val context = LocalContext.current

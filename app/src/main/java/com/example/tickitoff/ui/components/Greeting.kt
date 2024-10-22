@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.tickitoff.R
 import com.example.tickitoff.ui.theme.CustomBlue
+import java.util.Calendar
 
 // Greeting at the top of the screen with dynamic text and logo of app
 
@@ -24,8 +25,15 @@ fun Greeting(modifier: Modifier = Modifier) {
         verticalAlignment = Alignment.CenterVertically,
     ) {
         // Text that should switch between "Good morning!", "Good afternoon!", "Good evening!" depending on TOD.
+        val currentHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
+        val greetingText = when (currentHour) {
+            in 12..16 -> "Good afternoon!"
+            in 17..21 -> "Good evening!"
+            in 22..23 -> "Good night!"
+            else -> "Good morning!"
+        }
         Text(
-            text = "Good morning!",
+            text = greetingText,
             color = CustomBlue,
             fontSize = 40.sp,
             fontWeight = FontWeight.Bold,
