@@ -29,13 +29,11 @@ import com.example.tickitoff.data.BucketListItem
 import com.example.tickitoff.events.BucketListEvent
 import com.example.tickitoff.ui.theme.CustomGreen
 import com.example.tickitoff.utils.vibrateDevice
-import com.example.tickitoff.viewmodel.BucketListState
 
 // Scrollable ist of bucket list items/goals
 @Composable
 fun BucketListComposable(
-    bucketList: List<BucketListItem>, state: BucketListState,
-    onEvent: (BucketListEvent) -> Unit
+    bucketList: List<BucketListItem>, onEvent: (BucketListEvent) -> Unit
 ) {
     Column(
         modifier = Modifier

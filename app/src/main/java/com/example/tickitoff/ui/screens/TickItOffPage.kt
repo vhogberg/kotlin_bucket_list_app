@@ -104,7 +104,7 @@ fun TickItOffPage(
 
             if (filteredItems.isNotEmpty()) {
                 // Show the list of filtered items if there are any
-                BucketListComposable(bucketList = filteredItems, state = state, onEvent = onEvent)
+                BucketListComposable(bucketList = filteredItems, onEvent = onEvent)
             } else when (selectedOption) { // If the list is empty
                 "Active" -> {
                     // Show instructions for adding items if there are no active items
