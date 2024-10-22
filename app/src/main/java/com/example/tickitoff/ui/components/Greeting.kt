@@ -52,6 +52,7 @@ fun GreetingImage(modifier: Modifier = Modifier) {
         Spacer(
             modifier
                 .padding(8.dp)
-                .width(8.dp))
+                .width(8.dp)
+        )
     }
 }
