@@ -18,8 +18,11 @@ class BucketListItemViewModel(
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(BucketListState())
-    val state: StateFlow<BucketListState> = _state.asStateFlow().
-    stateIn(viewModelScope, SharingStarted.WhileSubscribed(6000), BucketListState()) // This creates an immutable StateFlow that external classes can observe but cannot modify directly.
+    val state: StateFlow<BucketListState> = _state.asStateFlow().stateIn(
+        viewModelScope,
+        SharingStarted.WhileSubscribed(6000),
+        BucketListState()
+    ) // This creates an immutable StateFlow that external classes can observe but cannot modify directly.
 
     init {
         viewModelScope.launch {
@@ -36,7 +39,7 @@ class BucketListItemViewModel(
                 val description = state.value.description
                 val doneByYear = state.value.doneByYear
 
-                if(title.isBlank() || description.isBlank() || doneByYear == 0){
+                if (title.isBlank() || description.isBlank() || doneByYear == 0) {
                     return // we don't have anything to insert
                 }
 
@@ -50,12 +53,14 @@ class BucketListItemViewModel(
                 viewModelScope.launch {
                     dao.upsertItem(bucketListItem)
                 }
-                _state.update { it.copy (
-                    isCreatingItem = false,
-                    title = "",
-                    description = "",
-                    doneByYear = 0
-                ) }
+                _state.update {
+                    it.copy(
+                        isCreatingItem = false,
+                        title = "",
+                        description = "",
+                        doneByYear = 0
+                    )
+                }
             }
 
             is BucketListEvent.DeleteItem -> {
@@ -64,32 +69,43 @@ class BucketListItemViewModel(
             }
 
             BucketListEvent.HideDialogForCreatingItem -> {
-                _state.update { it.copy (
-                    isCreatingItem = false
-                ) }
+                _state.update {
+                    it.copy(
+                        isCreatingItem = false
+                    )
+                }
             }
 
             is BucketListEvent.SetDescription -> {
-                _state.update { it.copy(
-                    description = event.description
-                ) }
+                _state.update {
+                    it.copy(
+                        description = event.description
+                    )
+                }
             }
 
             is BucketListEvent.SetTitle -> {
-                _state.update { it.copy(
-                    title = event.title
-                ) }
+                _state.update {
+                    it.copy(
+                        title = event.title
+                    )
+                }
             }
+
             BucketListEvent.ShowDialogForCreatingItem -> {
-                _state.update { it.copy (
-                    isCreatingItem = true
-                ) }
+                _state.update {
+                    it.copy(
+                        isCreatingItem = true
+                    )
+                }
             }
 
             is BucketListEvent.SetDoneByYear -> {
-                _state.update { it.copy(
-                    doneByYear = event.doneByYear
-                ) }
+                _state.update {
+                    it.copy(
+                        doneByYear = event.doneByYear
+                    )
+                }
             }
 
             is BucketListEvent.ShowActive -> {
@@ -123,17 +139,21 @@ class BucketListItemViewModel(
             }
 
             is BucketListEvent.ShowDialogForSharingItem -> {
-                _state.update { it.copy(
-                    isSharingItem = true,
-                    selectedItemTitle = event.title // Set the selected item's title
-                ) }
+                _state.update {
+                    it.copy(
+                        isSharingItem = true,
+                        selectedItemTitle = event.title // Set the selected item's title
+                    )
+                }
             }
 
             is BucketListEvent.HideDialogForSharingItem -> {
-                _state.update { it.copy(
-                    isSharingItem = false,
-                    selectedItemTitle = null // Clear the title when hiding the dialog
-                ) }
+                _state.update {
+                    it.copy(
+                        isSharingItem = false,
+                        selectedItemTitle = null // Clear the title when hiding the dialog
+                    )
+                }
             }
         }
     }

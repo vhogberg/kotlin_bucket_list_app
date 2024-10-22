@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 
 @Database(
     entities = [BucketListItem::class],
-    version = 2 // ++change to update to new clean database
+    version = 1 // ++change to update to new clean database
 )
 abstract class BucketListDatabase : RoomDatabase() {
 

@@ -33,15 +33,17 @@ import com.example.tickitoff.utils.vibrateDevice
 
 // Scrollable ist of bucket list items/goals
 @Composable
-fun BucketListComposable(bucketList: List<BucketListItem>, state: BucketListState,
-                         onEvent: (BucketListEvent) -> Unit) {
+fun BucketListComposable(
+    bucketList: List<BucketListItem>, state: BucketListState,
+    onEvent: (BucketListEvent) -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
     ) {
 
         // If isCreatingItem is true, then show the dialog to add an item
-        if (state.isCreatingItem){
+        if (state.isCreatingItem) {
             AddNewItemDialog(state = state, onEvent = onEvent)
         }
         // If isSharingItem is true, then show the dialog to share an item and pass the title of that item
@@ -61,8 +63,10 @@ fun BucketListComposable(bucketList: List<BucketListItem>, state: BucketListStat
 
 // Singular item UI
 @Composable
-fun BucketListItemComposable(item: BucketListItem, state: BucketListState,
-                             onEvent: (BucketListEvent) -> Unit) {
+fun BucketListItemComposable(
+    item: BucketListItem, state: BucketListState,
+    onEvent: (BucketListEvent) -> Unit
+) {
 
     val context = LocalContext.current
 
@@ -75,7 +79,7 @@ fun BucketListItemComposable(item: BucketListItem, state: BucketListState,
             .padding(16.dp),
         verticalAlignment = Alignment.CenterVertically // Centers icons and text vertically
     ) {
-        Column (
+        Column(
             modifier = Modifier.weight(1f) // Occupies all space available
         ) {
             // Title of goal
@@ -111,12 +115,16 @@ fun BucketListItemComposable(item: BucketListItem, state: BucketListState,
         }
 
         // For active goals
-        if (!item.completed){
+        if (!item.completed) {
             Column {
                 // "I completed the goal" button
                 IconButton(onClick = {
                     onEvent(BucketListEvent.SetCompleted(item, true)) // set isCompleted to true
-                    Toast.makeText(context, "Set goal '${item.title}' as complete, congrats!", Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        context,
+                        "Set goal '${item.title}' as complete, congrats!",
+                        Toast.LENGTH_LONG
+                    ).show()
                     vibrateDevice(context)
                 }) {
                     Icon(
@@ -129,7 +137,8 @@ fun BucketListItemComposable(item: BucketListItem, state: BucketListState,
                 // "I want to remove the goal" button
                 IconButton(onClick = {
                     onEvent(BucketListEvent.DeleteItem(item)) // delete the item from db
-                    Toast.makeText(context, "Removed the goal '${item.title}'", Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, "Removed the goal '${item.title}'", Toast.LENGTH_LONG)
+                        .show()
                 }) {
                     Icon(
                         painter = painterResource(id = R.drawable.baseline_delete_24),
