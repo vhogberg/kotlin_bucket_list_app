@@ -41,8 +41,7 @@ import com.example.tickitoff.viewmodel.BucketListState
 @Composable
 fun AddNewItemDialog(
     state: BucketListState,
-    onEvent: (BucketListEvent) -> Unit,
-    modifier: Modifier = Modifier
+    onEvent: (BucketListEvent) -> Unit
 ) {
 
     val context = LocalContext.current
