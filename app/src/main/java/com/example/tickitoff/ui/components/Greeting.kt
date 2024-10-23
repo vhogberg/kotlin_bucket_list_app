@@ -28,8 +28,7 @@ fun Greeting(modifier: Modifier = Modifier) {
         val currentHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
         val greetingText = when (currentHour) {
             in 12..16 -> "Good afternoon!"
-            in 17..21 -> "Good evening!"
-            in 22..23 -> "Good night!"
+            in 17..23 -> "Good evening!"
             else -> "Good morning!"
         }
         Text(

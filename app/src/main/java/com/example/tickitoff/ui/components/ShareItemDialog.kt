@@ -205,7 +205,7 @@ fun shareViaEmail(context: Context, title: String) {
         ) // Message
     }
     // Start the intent
-    context.startActivity(Intent.createChooser(emailIntent, "Choose your email client"))
+    context.startActivity(Intent.createChooser(emailIntent, "Choose your client"))
 }
 
 // Function to share completed goal via twitter
