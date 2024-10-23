@@ -31,20 +31,17 @@ fun scheduleRecurringReminder(context: Context) {
         set(Calendar.SECOND, 0) // Set seconds to 0
     }
 
-    // For testing
-    //    val calendar = Calendar.getInstance().apply {
-    //        timeInMillis = System.currentTimeMillis()
-    //        add(Calendar.MINUTE, 2)  // Schedule the notification for 2 minutes from now for testing
-    //    }
-
-    // If the time is in the past then add one day
+    // If the time is in the past, add one week
     if (calendar.timeInMillis < System.currentTimeMillis()) {
-        calendar.add(Calendar.DAY_OF_YEAR, 1)
+        calendar.add(Calendar.WEEK_OF_YEAR, 1)
     }
 
-    // Schedule the alarm
+    // Define a weekly interval (7 days in milliseconds)
+    val weeklyInterval = 7 * AlarmManager.INTERVAL_DAY
+
+    // Schedule the alarm to repeat weekly
     alarmManager.setInexactRepeating(
-        AlarmManager.RTC_WAKEUP, calendar.timeInMillis, AlarmManager.INTERVAL_DAY,  // Repeat daily
+        AlarmManager.RTC_WAKEUP, calendar.timeInMillis, weeklyInterval,  // Repeat weekly
         pendingIntent
     )
 }
