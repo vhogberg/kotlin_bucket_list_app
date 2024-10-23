@@ -2,6 +2,8 @@ package com.example.tickitoff.viewmodel
 
 import com.example.tickitoff.data.BucketListItem
 
+// State management for setting certain values and checking whether user is currently in a certain interaction
+
 data class BucketListState(
     val bucketListItems: List<BucketListItem> = emptyList(),
     val title: String = "",
@@ -14,6 +16,7 @@ data class BucketListState(
     val filter: BucketListFilter = BucketListFilter.Active // Default to active filter
 )
 
+// Filter for showing either active or completed items
 enum class BucketListFilter {
     Active,
     Completed
