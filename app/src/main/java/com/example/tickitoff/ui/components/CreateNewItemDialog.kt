@@ -141,11 +141,15 @@ fun AddNewItemDialog(
                     TextButton(
                         onClick = {
                             onEvent(BucketListEvent.CreateItem) // Create the item
-                            Toast.makeText(
-                                context,
-                                "Created the goal '${state.title}', good luck!",
-                                Toast.LENGTH_LONG
-                            ).show()
+
+                            // Only show toast if user has entered something for all fields
+                            if (state.title.isNotEmpty() && state.description.isNotEmpty() && state.doneByYear != 0) {
+                                Toast.makeText(
+                                    context,
+                                    "Created the goal '${state.title}', good luck!",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                            }
                         }
                     ) {
                         Text(

@@ -6,9 +6,11 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -79,8 +81,10 @@ fun TickItOffPage(
         Column(
             modifier = Modifier
                 .fillMaxHeight()
-                .padding(8.dp)
+                .padding(start = 8.dp, end = 8.dp, top = 8.dp, bottom = 0.dp)
         ) {
+            // Spacer at the top so greeting is not hidden behind camera punch hole
+            Spacer(modifier = Modifier.height(40.dp))
 
             Greeting() // Greeting at the top
 
