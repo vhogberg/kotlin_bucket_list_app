@@ -91,7 +91,7 @@ fun SegmentedControlSwitch(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                // List of options, in our case we always have just 2.
+                // List of options, in our case we always have just 2, but it is possible to have more.
                 options.forEachIndexed { index, option ->
                     Box(
                         modifier = Modifier

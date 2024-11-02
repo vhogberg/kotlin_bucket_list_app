@@ -24,7 +24,7 @@ fun Greeting(modifier: Modifier = Modifier) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        // Text that should switch between "Good morning!", "Good afternoon!", "Good evening!" depending on TOD.
+        // Text switches between "Good morning!", "Good afternoon!", "Good evening!" depending on the TOD.
         val currentHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
         val greetingText = when (currentHour) {
             in 12..16 -> "Good afternoon!"

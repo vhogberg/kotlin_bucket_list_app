@@ -13,6 +13,8 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
+// Viewmodel with onEvent method for handling UI interactions
+
 class BucketListItemViewModel(
     private val dao: BucketListItemDao
 ) : ViewModel() {
@@ -22,6 +24,7 @@ class BucketListItemViewModel(
         viewModelScope, SharingStarted.WhileSubscribed(6000), BucketListState()
     ) // This creates an immutable StateFlow that external classes can observe but cannot modify directly.
 
+    // update state with all current items in the db
     init {
         viewModelScope.launch {
             dao.getAllItems().collect { items ->
@@ -30,6 +33,7 @@ class BucketListItemViewModel(
         }
     }
 
+    // Method for handling all events listed and described in the BucketListEvent interface
     fun onEvent(event: BucketListEvent) {
         when (event) {
             BucketListEvent.CreateItem -> {

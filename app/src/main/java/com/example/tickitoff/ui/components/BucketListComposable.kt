@@ -49,7 +49,7 @@ fun BucketListComposable(
                 )
             }
             item {
-                // Spacer for bottom of list so last item is not hidden behind FAB
+                // Spacer for bottom of list so last item is not hidden behind the FAB
                 Spacer(modifier = Modifier.height(120.dp))
             }
         }

@@ -5,6 +5,8 @@ import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
 
+// To enable vibration of the device for more interactive feedback, used for when clicking "complete" on a goal atm
+
 fun vibrateDevice(context: Context) {
     val vibrator = context.getSystemService(Vibrator::class.java) // Get via getsystemservice
     if (vibrator.hasVibrator()) { // Checks to ensure the device actually has a vibrating part
