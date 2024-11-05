@@ -16,10 +16,30 @@
 - **Jetpack Compose**: A declarative UI framework by Google for building Android apps.
 - **Room Database**: Provides an abstraction layer over SQLite for database management.
 
+## Video walkthrough of the app 🎥
+Watch a demo of **TickItOff** on [YouTube](https://www.youtube.com/watch?v=mAOkPEfctAw).
+
 ## Screenshots 📸
 
+### Main Screen
+![Main Screen](screenshots/studio64_NpGyqLRnbC.png)
 
+<div style="display: flex; flex-direction: row; gap: 20px;">
+  
+  <div style="flex: 1; text-align: center;">
+    <h3>Add New Goal Dialog</h3>
+    <img src="screenshots/studio64_2CHp7keafe.png" alt="Add New Goal Screen" width="300"/>
+  </div>
 
+  <div style="flex: 1; text-align: center;">
+    <h3>Share A Completed Goal Dialog</h3>
+    <img src="screenshots/studio64_GRy69FDnxg.png" alt="Share A Completed Goal Dialog" width="300"/>
+  </div>
+
+</div>
+
+### Animated Menu Switch
+![Animated menu switch](screenshots/studio64_oUAoFHaEHZ.gif)
 
 ## Folder Structure 📂
 
