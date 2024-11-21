@@ -2,6 +2,8 @@
 
 **TickItOff** is a bucket list app where users can set goals they aspire to achieve by a specific year. This Android app, developed in Kotlin using Jetpack Compose, allows users to track their progress, mark goals as complete, and share accomplishments with friends. Built as part of the MPROG course at Stockholm University.
 
+This app was the winner of best developed mobile app in the course! 🏆
+
 ## Features ✨
 
 - **Add Goals**: Create a list of goals you aim to complete by a set year.
